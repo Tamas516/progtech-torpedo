@@ -73,6 +73,8 @@
                     <excludes>
                         <exclude>hu/nye/torpedo/model/*</exclude>
                         <exclude>hu/nye/torpedo/Main.*</exclude>
+                        <exclude>hu/nye/torpedo/ui/PrintWrapper.*</exclude>
+                        <exclude>hu/nye/torpedo/**/*Exception.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

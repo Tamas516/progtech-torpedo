@@ -48,7 +48,7 @@ public class MapParser {
             result[i]=new boolean[numberOfColumns];
             for(int j=0; j<numberOfColumns; j++)
             {
-                result[i][j]=map[i][j].equals("0");
+                result[i][j]=map[i][j].equals("X");
             }
         }
         return result;
