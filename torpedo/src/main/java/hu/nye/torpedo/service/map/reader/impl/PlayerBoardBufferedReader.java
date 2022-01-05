@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.nye.torpedo.model.RawBoard;
 import hu.nye.torpedo.service.exception.PlayerBoardReadingException;
 import hu.nye.torpedo.service.map.BoardReader;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,23 +27,25 @@ public class PlayerBoardBufferedReader implements BoardReader {
     }
 
     @Override
-    public List<String> readBoard() throws PlayerBoardReadingException {
+    public RawBoard readBoard() throws PlayerBoardReadingException {
 
         LOGGER.info("Reading the map");
 
         String row;
-        List<String> rows = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
 
         try {
             while ((row = reader.readLine()) != null) {
-                rows.add(row);
+                stringBuilder.append(row);
+                stringBuilder.append("\n");
             }
         } catch (IOException e) {
             LOGGER.error("Failed to read map", e);
             throw new PlayerBoardReadingException("Failed to read map");
         }
 
-        return rows;
+        String board = stringBuilder.toString();
+        return new RawBoard(board);
     }
 
 }

@@ -1,7 +1,6 @@
 package hu.nye.torpedo.service.util;
 
 import hu.nye.torpedo.model.PlayerBoard;
-import hu.nye.torpedo.ui.BoardPrinter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class BoardUtilTest {
+public class PlayerBoardUtilTest {
 
     private static final int NUMBER_OF_ROWS = 3;
     private static final int NUMBER_OF_COLUMNS = 3;
@@ -37,10 +36,10 @@ public class BoardUtilTest {
             {"0", "0", "0"}
     };
 
-    private static final PlayerBoard PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
-    private static final PlayerBoard OPPONENT_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP3);
-    private static final PlayerBoard PLAYER_EMPTY_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP2);
-    private static final PlayerBoard OPPONENT_EMPTY_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP4);
+    private static final PlayerBoard PLAYER_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
+    private static final PlayerBoard OPPONENT_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP3);
+    private static final PlayerBoard PLAYER_EMPTY_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP2);
+    private static final PlayerBoard OPPONENT_EMPTY_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP4);
 
     private static final int FIRST_ROW_INDEX = 0;
     private static final int FIRST_COLUMN_INDEX = 0;
@@ -61,7 +60,7 @@ public class BoardUtilTest {
         // given in setup
 
         // when
-        List<String> result = underTest.getRowOfBoard(PLAYER_BOARD, FIRST_ROW_INDEX);
+        List<String> result = underTest.getRowOfBoard(PLAYER_PLAYER_BOARD, FIRST_ROW_INDEX);
 
         // then
         assertEquals(FIRST_ROW_AS_LIST, result);
@@ -72,7 +71,7 @@ public class BoardUtilTest {
         // given in setup
 
         // when
-        List<String> result = underTest.getColumnOfBoard(PLAYER_BOARD, FIRST_COLUMN_INDEX);
+        List<String> result = underTest.getColumnOfBoard(PLAYER_PLAYER_BOARD, FIRST_COLUMN_INDEX);
 
         // then
         assertEquals(FIRST_COLUMN_AS_LIST, result);
@@ -84,7 +83,7 @@ public class BoardUtilTest {
         // given in setup
 
         // when
-        boolean result = underTest.isBoardCompleted(PLAYER_BOARD, PLAYER_EMPTY_BOARD);
+        boolean result = underTest.isBoardCompleted(PLAYER_PLAYER_BOARD, PLAYER_EMPTY_PLAYER_BOARD);
 
         // then
         assertTrue(result);
@@ -95,7 +94,7 @@ public class BoardUtilTest {
         // given in setup
 
         // when
-        boolean result1 = underTest.isBoardCompleted(OPPONENT_BOARD, OPPONENT_EMPTY_BOARD);
+        boolean result1 = underTest.isBoardCompleted(OPPONENT_PLAYER_BOARD, OPPONENT_EMPTY_PLAYER_BOARD);
 
         // then
         assertFalse(result1);

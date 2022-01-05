@@ -1,12 +1,10 @@
 package hu.nye.torpedo.service.map;
 
-import java.util.List;
-
 import hu.nye.torpedo.model.PlayerBoard;
+import hu.nye.torpedo.model.RawBoard;
 import hu.nye.torpedo.service.exception.PlayerBoardParsingException;
 import hu.nye.torpedo.service.exception.PlayerBoardReadingException;
 import hu.nye.torpedo.service.map.parser.PlayerBoardParser;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,8 +34,8 @@ public class BoardReaderFacade {
      */
     public PlayerBoard readBoard() {
         try {
-            List<String> rows = boardReader.readBoard();
-            PlayerBoard playerBoard = PlayerBoardParser.parseBoard(rows);
+            RawBoard rawBoard = boardReader.readBoard();
+            PlayerBoard playerBoard = playerBoardParser.parseBoard(rawBoard);
 
             return playerBoard;
         } catch (PlayerBoardReadingException e) {

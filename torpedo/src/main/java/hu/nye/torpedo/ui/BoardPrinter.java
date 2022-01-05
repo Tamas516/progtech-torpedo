@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import hu.nye.torpedo.model.PlayerBoard;
 import hu.nye.torpedo.service.util.BoardUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

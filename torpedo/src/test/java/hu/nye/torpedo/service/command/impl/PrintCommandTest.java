@@ -21,10 +21,10 @@ public class PrintCommandTest {
     private static final String PRINT_COMMAND = "print";
     private static final String NOT_PRINT_COMMAND = "not-print";
 
-    private static final PlayerBoard PLAYER_BOARD = new PlayerBoard(0, 0, null);
-    private static final PlayerBoard PLAYER_BOARD1 = new PlayerBoard(0, 0, null);
-    private static final PlayerBoard PLAYER_BOARD2 = new PlayerBoard(0, 0, null);
-    private static final PlayerBoard PLAYER_BOARD3 = new PlayerBoard(0, 0, null);
+    private static final PlayerBoard PLAYER_PLAYER_BOARD = new PlayerBoard(0, 0, null);
+    private static final PlayerBoard PLAYER_PLAYER_BOARD_1 = new PlayerBoard(0, 0, null);
+    private static final PlayerBoard PLAYER_PLAYER_BOARD_2 = new PlayerBoard(0, 0, null);
+    private static final PlayerBoard PLAYER_PLAYER_BOARD_3 = new PlayerBoard(0, 0, null);
 
 
     private GameState gameState;
@@ -35,7 +35,7 @@ public class PrintCommandTest {
 
     @BeforeEach
     public void setUp() {
-        gameState = new GameState(PLAYER_BOARD, PLAYER_BOARD1, PLAYER_BOARD2, PLAYER_BOARD3, false);
+        gameState = new GameState(PLAYER_PLAYER_BOARD, PLAYER_PLAYER_BOARD_1, PLAYER_PLAYER_BOARD_2, PLAYER_PLAYER_BOARD_3, false);
         underTest = new PrintCommand(gameState, boardPrinter);
     }
 
@@ -69,7 +69,7 @@ public class PrintCommandTest {
         underTest.process(PRINT_COMMAND);
 
         // then
-        verify(boardPrinter,times(4)).printBoard(PLAYER_BOARD);
+        verify(boardPrinter,times(4)).printBoard(PLAYER_PLAYER_BOARD);
 
     }
 

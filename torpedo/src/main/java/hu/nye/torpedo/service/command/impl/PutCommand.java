@@ -47,63 +47,51 @@ public class PutCommand implements Command {
         String[] parts = input.split(" ");
         int rowIndex = Integer.parseInt(parts[1]);
         int columnIndex = Integer.parseInt(parts[2]);
-        PlayerBoard playerFixed = gameState.getCurrentBoard();
-        PlayerBoard opponentFixed = gameState.getCurrentBoard1();
+        PlayerBoard playerBoard = gameState.getCurrentBoard();
+        PlayerBoard opponentPlayerBoard = gameState.getCurrentBoard1();
 
-
-        String[][] fixed = playerFixed.getBoard();
-        String[][] fixed1 = opponentFixed.getBoard();
+        String[][] fixed1 = playerBoard.getBoard();
+        String[][] fixed = opponentPlayerBoard.getBoard();
 
         LOGGER.info("Performing put command with rowIndex = {}, columnIndex = {}", rowIndex, columnIndex);
 
-        if (fixed[rowIndex][columnIndex].equals("0")) {
-            try {
+        try {
+            if (fixed1[rowIndex][columnIndex].equals("0")) {
                 String ch = "X";
-                PlayerBoard newBoard = putPerformer.perform(gameState.getCurrentBoard2(), rowIndex, columnIndex, ch);
-                gameState.setCurrentBoard2(newBoard);
+                PlayerBoard newPlayerBoard = putPerformer.perform(gameState.getCurrentBoard2(), rowIndex, columnIndex, ch);
+                gameState.setCurrentBoard2(newPlayerBoard);
                 System.out.println("Player Empty Board");
-                boardPrinter.printBoard(newBoard);
-            } catch (PutException e) {
-                LOGGER.error("Exception occurred while performing put operation", e);
-                printWrapper.printLine(PUT_ERROR_MESSAGE);
-            }
-        } else if (fixed[rowIndex][columnIndex].equals("+")) {
-            try {
+                boardPrinter.printBoard(newPlayerBoard);
+            } else if (fixed1[rowIndex][columnIndex].equals("+")) {
                 String ch = "+";
-                PlayerBoard newBoard = putPerformer.perform(gameState.getCurrentBoard2(), rowIndex, columnIndex, ch);
-                gameState.setCurrentBoard2(newBoard);
+                PlayerBoard newPlayerBoard = putPerformer.perform(gameState.getCurrentBoard2(), rowIndex, columnIndex, ch);
+                gameState.setCurrentBoard2(newPlayerBoard);
                 System.out.println("Player Empty Board");
-                boardPrinter.printBoard(newBoard);
-            } catch (PutException e) {
-                LOGGER.error("Exception occurred while performing put operation", e);
-                printWrapper.printLine(PUT_ERROR_MESSAGE);
+                boardPrinter.printBoard(newPlayerBoard);
             }
+        } catch (PutException e) {
+            LOGGER.error("Exception occurred while performing put operation", e);
+                printWrapper.printLine(PUT_ERROR_MESSAGE);
         }
 
-        if (fixed1[rowIndex][columnIndex].equals("0")) {
-            try {
+        try {
+            if (fixed[rowIndex][columnIndex].equals("0")) {
                 String ch = "X";
-                PlayerBoard newBoard1 = putPerformer.perform(gameState.getCurrentBoard3(), rowIndex, columnIndex, ch);
-                gameState.setCurrentBoard3(newBoard1);
+                PlayerBoard newPlayerBoard1 = putPerformer.perform(gameState.getCurrentBoard3(), rowIndex, columnIndex, ch);
+                gameState.setCurrentBoard3(newPlayerBoard1);
                 System.out.println("Opponent Empty Board");
-                boardPrinter.printBoard(newBoard1);
-            } catch (PutException e) {
-                LOGGER.error("Exception occurred while performing put operation", e);
-                printWrapper.printLine(PUT_ERROR_MESSAGE);
-            }
-        } else if (fixed1[rowIndex][columnIndex].equals("+")) {
-            try {
+                boardPrinter.printBoard(newPlayerBoard1);
+            } else if (fixed[rowIndex][columnIndex].equals("+")) {
                 String ch = "+";
-                PlayerBoard newBoard1 = putPerformer.perform(gameState.getCurrentBoard3(), rowIndex, columnIndex, ch);
-                gameState.setCurrentBoard3(newBoard1);
+                PlayerBoard newPlayerBoard1 = putPerformer.perform(gameState.getCurrentBoard3(), rowIndex, columnIndex, ch);
+                gameState.setCurrentBoard3(newPlayerBoard1);
                 System.out.println("Opponent Empty Board");
-                boardPrinter.printBoard(newBoard1);
-            } catch (PutException e) {
-                LOGGER.error("Exception occurred while performing put operation", e);
-                printWrapper.printLine(PUT_ERROR_MESSAGE);
+                boardPrinter.printBoard(newPlayerBoard1);
             }
+        } catch (PutException e) {
+            LOGGER.error("Exception occurred while performing put operation", e);
+                printWrapper.printLine(PUT_ERROR_MESSAGE);
         }
-
 
     }
 

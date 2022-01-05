@@ -3,7 +3,6 @@ package hu.nye.torpedo.service.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import hu.nye.torpedo.model.GameState;
 import hu.nye.torpedo.model.PlayerBoard;
 
 /**
@@ -58,11 +57,11 @@ public class BoardUtil {
      * @param playerBoard the map to check
      * @return {@code true} if the map is completed, {@code false} otherwise
      */
-    public boolean isBoardCompleted(PlayerBoard playerBoard, PlayerBoard playerBoard1) {
+    public boolean isBoardCompleted(PlayerBoard playerBoard, PlayerBoard playerPlayerBoard1) {
         boolean result = false;
 
         String[][] board = playerBoard.getBoard();
-        String[][] board1 = playerBoard1.getBoard();
+        String[][] board1 = playerPlayerBoard1.getBoard();
 
         int boardPlus = 0;
         int board1Plus = 0;

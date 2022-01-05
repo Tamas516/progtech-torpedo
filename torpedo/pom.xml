@@ -86,7 +86,11 @@
                 <configuration>
                     <excludes>
                         <exclude>hu/nye/torpedo/model/*</exclude>
+                        <exclude>hu/nye/torpedo/xml/model/*</exclude>
+                        <exclude>hu/nye/torpedo/persistence/xml/PersistableMapVO.*</exclude>
                         <exclude>hu/nye/torpedo/Main.*</exclude>
+                        <exclude>hu/nye/torpedo/**/*Exception.*</exclude>
+                        <exclude>hu/nye/torpedo/**/*Configuration.*</exclude>
                         <exclude>hu/nye/torpedo/ui/PrintWrapper.*</exclude>
                     </excludes>
                 </configuration>
@@ -116,7 +120,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.8</minimum>
+                                            <minimum>0.16</minimum>
                                         </limit>
                                     </limits>
                                 </rule>

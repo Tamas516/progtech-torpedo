@@ -1,8 +1,10 @@
 package hu.nye.torpedo.service.map.parser;
 
+import java.util.Arrays;
 import java.util.List;
 
 import hu.nye.torpedo.model.PlayerBoard;
+import hu.nye.torpedo.model.RawBoard;
 import hu.nye.torpedo.service.exception.PlayerBoardParsingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +17,13 @@ public class PlayerBoardParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PlayerBoardParser.class);
 
-    private static int numberOfRows;
-    private static int numberOfColumns;
+    private final int numberOfRows;
+    private final int numberOfColumns;
 
 
     public PlayerBoardParser(int numberOfRows, int numberOfColumns) {
-        PlayerBoardParser.numberOfRows = numberOfRows;
-        PlayerBoardParser.numberOfColumns = numberOfColumns;
+        this.numberOfRows = numberOfRows;
+        this.numberOfColumns = numberOfColumns;
     }
 
     /**
@@ -29,9 +31,10 @@ public class PlayerBoardParser {
      *
      */
 
-    public static PlayerBoard parseBoard(List<String> rows) throws PlayerBoardParsingException {
-        LOGGER.info("Parsing the List = {}", rows);
+    public PlayerBoard parseBoard(RawBoard rawBoard) throws PlayerBoardParsingException {
+        LOGGER.info("Parsing the List = {}", rawBoard);
 
+        List<String> rows = Arrays.asList(rawBoard.getBoard().split("\n"));
         checkNumberOfRows(rows);
         checkNumberOfColumns(rows);
 
@@ -39,13 +42,13 @@ public class PlayerBoardParser {
         return new PlayerBoard(numberOfRows, numberOfColumns, board);
     }
 
-    private static void checkNumberOfRows(List<String> rows) throws PlayerBoardParsingException {
+    private void checkNumberOfRows(List<String> rows) throws PlayerBoardParsingException {
         if (rows.size() != numberOfRows) {
             throw new PlayerBoardParsingException("Number of rows must be " + numberOfRows);
         }
     }
 
-    private static void checkNumberOfColumns(List<String> rows) throws PlayerBoardParsingException {
+    private void checkNumberOfColumns(List<String> rows) throws PlayerBoardParsingException {
         for (String row : rows) {
             if (row.length() != numberOfColumns) {
                 throw new PlayerBoardParsingException("Number of columns must be " + numberOfColumns);
@@ -54,7 +57,7 @@ public class PlayerBoardParser {
     }
 
 
-    private static String[][] getBoard(List<String> rows) {
+    private String[][] getBoard(List<String> rows) {
         String[][] board = new String[numberOfRows][numberOfColumns];
 
         for (int x = 0; x < numberOfRows; x++) {

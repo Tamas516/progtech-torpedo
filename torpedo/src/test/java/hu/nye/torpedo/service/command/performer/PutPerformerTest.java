@@ -29,8 +29,8 @@ public class PutPerformerTest {
             {"0", "+"}
     };
 
-    private static final PlayerBoard INPUT_PLAYER_BOARD= new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, INPUT_BOARD);
-    private static final PlayerBoard EXPECTED_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, EXPECTED_BOARD);
+    private static final PlayerBoard INPUT_PLAYER_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, INPUT_BOARD);
+    private static final PlayerBoard EXPECTED_PLAYER_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, EXPECTED_BOARD);
 
     private PutPerformer underTest;
 
@@ -44,10 +44,10 @@ public class PutPerformerTest {
         // given in setup
 
         // when
-        PlayerBoard result = underTest.perform(INPUT_PLAYER_BOARD, TARGET_ROW_INDEX, VALID_TARGET_COLUMN_INDEX, TARGET_CHARACTER);
+        PlayerBoard result = underTest.perform(INPUT_PLAYER_PLAYER_BOARD, TARGET_ROW_INDEX, VALID_TARGET_COLUMN_INDEX, TARGET_CHARACTER);
 
         // then
-        assertEquals(EXPECTED_PLAYER_BOARD, result);
+        assertEquals(EXPECTED_PLAYER_PLAYER_BOARD, result);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class PutPerformerTest {
 
         // when - then
         Assertions.assertThrows(PutException.class, () -> {
-            underTest.perform(INPUT_PLAYER_BOARD, TARGET_ROW_INDEX, INVALID_TARGET_COLUMN_INDEX, TARGET_CHARACTER);
+            underTest.perform(INPUT_PLAYER_PLAYER_BOARD, TARGET_ROW_INDEX, INVALID_TARGET_COLUMN_INDEX, TARGET_CHARACTER);
         });
     }
 

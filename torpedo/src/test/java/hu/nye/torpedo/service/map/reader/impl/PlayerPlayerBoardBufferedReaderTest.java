@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
+import hu.nye.torpedo.model.RawBoard;
 import hu.nye.torpedo.service.exception.PlayerBoardReadingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +18,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class PlayerBoardBufferedReaderTest {
+public class PlayerPlayerBoardBufferedReaderTest {
 
-    private static final String LINE_1="line1";
-    private static final String LINE_2="line2";
+    private static final String LINE_1="00++";
+    private static final String LINE_2="++00";
 
-    private static final List<String> EXPECTED_RAW_BOARD=List.of(LINE_1, LINE_2);
+    private static final String EXPECTED_BOARD="00++\n++00\n";
 
     @Mock
     private BufferedReader bufferedReader;
@@ -39,11 +40,13 @@ public class PlayerBoardBufferedReaderTest {
     public void testReadBoardShouldReturnReadLinesFromBufferedReader() throws IOException, PlayerBoardReadingException {
         //given
         given(bufferedReader.readLine()).willReturn(LINE_1, LINE_2, null);
+        RawBoard expected = new RawBoard(EXPECTED_BOARD);
+
         //when
-        List<String> result=underTest.readBoard();
+        RawBoard result=underTest.readBoard();
 
         //then
-        assertEquals(EXPECTED_RAW_BOARD, result);
+        assertEquals(expected, result);
     }
 
     @Test

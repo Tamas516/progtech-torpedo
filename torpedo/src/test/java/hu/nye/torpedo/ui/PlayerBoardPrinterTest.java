@@ -18,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class BoardPrinterTest {
+public class PlayerBoardPrinterTest {
 
     private static final int NUMBER_OF_ROWS = 4;
     private static final int NUMBER_OF_COLUMNS = 4;
@@ -32,10 +32,10 @@ public class BoardPrinterTest {
             {" ", "1", "2", "3"},
     };
 
-    private static final PlayerBoard PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
-    private static final PlayerBoard OPPONENT_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
-    private static final PlayerBoard PLAYER_EMPTY_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
-    private static final PlayerBoard OPPONENT_EMPTY_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
+    private static final PlayerBoard PLAYER_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
+    private static final PlayerBoard OPPONENT_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
+    private static final PlayerBoard PLAYER_EMPTY_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
+    private static final PlayerBoard OPPONENT_EMPTY_PLAYER_BOARD = new PlayerBoard(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, MAP);
 
     private static final List<List<String>> ROWS_AS_LISTS = List.of(
             List.of(" ", "1", "2", "3"),
@@ -71,7 +71,7 @@ public class BoardPrinterTest {
     public void testPrintMapShouldDelegateCorrectCallsToPrintWrapper() {
         // given
         for (int i = 0; i < ROWS_AS_LISTS.size(); i++) {
-            given(boardUtil.getRowOfBoard(PLAYER_BOARD, i)).willReturn(ROWS_AS_LISTS.get(i));
+            given(boardUtil.getRowOfBoard(PLAYER_PLAYER_BOARD, i)).willReturn(ROWS_AS_LISTS.get(i));
         }
 //        for (int i = 0; i < ROWS_AS_LISTS.size(); i++) {
 //            given(boardUtil.getRowOfBoard(OPPONENT_BOARD, i)).willReturn(ROWS_AS_LISTS.get(i));
@@ -84,7 +84,7 @@ public class BoardPrinterTest {
 //        }
 
         // when
-        underTest.printBoard(PLAYER_BOARD);
+        underTest.printBoard(PLAYER_PLAYER_BOARD);
 
         // then
         verify(printWrapper, times(6)).printLine(printWrapperArgumentCaptor.capture());

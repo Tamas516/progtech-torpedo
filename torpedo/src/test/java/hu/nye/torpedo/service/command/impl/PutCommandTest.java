@@ -1,12 +1,10 @@
 package hu.nye.torpedo.service.command.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import hu.nye.torpedo.model.GameState;
 import hu.nye.torpedo.model.PlayerBoard;
 import hu.nye.torpedo.service.command.performer.PutPerformer;
-import hu.nye.torpedo.service.exception.PutException;
 import hu.nye.torpedo.ui.BoardPrinter;
 import hu.nye.torpedo.ui.PrintWrapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,13 +21,14 @@ public class PutCommandTest {
 
     private static final int ROW_INDEX = 1;
     private static final int COLUMN_INDEX = 1;
-    private static final String CHARACTER = "+";
+    private static final String CHARACTER = "X";
+    private static final String CHARACTER2 = "+";
 
-    private static final PlayerBoard PLAYER_BOARD = new PlayerBoard(0, 0, null);
-    private static final PlayerBoard OPPONENT_BOARD = new PlayerBoard(0, 0, null);
-    private static final PlayerBoard PLAYER_EMPTY_BOARD = new PlayerBoard(0, 0, null);
-    private static final PlayerBoard OPPONENT_EMPTY_BOARD = new PlayerBoard(0, 0, null);
-    private static final PlayerBoard NEW_PLAYER_EMPTY_BOARD = new PlayerBoard(0, 0, null);
+
+    private static final PlayerBoard PLAYER_PLAYER_BOARD = new PlayerBoard(0, 0, null);
+    private static final PlayerBoard OPPONENT_PLAYER_BOARD = new PlayerBoard(0, 0, null);
+    private static final PlayerBoard PLAYER_EMPTY_PLAYER_BOARD = new PlayerBoard(0, 0, null);
+    private static final PlayerBoard OPPONENT_EMPTY_PLAYER_BOARD = new PlayerBoard(0, 0, null);
 
     private static final String PUT_ERROR_MESSAGE = "Can't write to a fixed position";
 
@@ -46,7 +45,7 @@ public class PutCommandTest {
 
     @BeforeEach
     public void setUp() {
-        gameState = new GameState(PLAYER_BOARD, OPPONENT_BOARD, PLAYER_EMPTY_BOARD, OPPONENT_EMPTY_BOARD, false);
+        gameState = new GameState(PLAYER_PLAYER_BOARD, OPPONENT_PLAYER_BOARD, PLAYER_EMPTY_PLAYER_BOARD, OPPONENT_EMPTY_PLAYER_BOARD, false);
         underTest = new PutCommand(gameState, putPerformer, boardPrinter, printWrapper);
     }
 
@@ -73,9 +72,33 @@ public class PutCommandTest {
     }
 
 //    @Test
+//    public void testProcessShouldPerformValidPutOperation() throws PutException {
+//        // given
+//        given(putPerformer.perform(PLAYER_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER)).willReturn(OPPONENT_EMPTY_BOARD);
+//        given(putPerformer.perform(PLAYER_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER)).willReturn(OPPONENT_EMPTY_BOARD);
+//
+//
+//
+//        // when
+//        underTest.process(PUT_COMMAND);
+//
+//        // then
+//        verify(putPerformer).perform(PLAYER_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER);
+//        assertEquals(OPPONENT_EMPTY_BOARD, gameState.getCurrentBoard3());
+//        verify(boardPrinter).printBoard(OPPONENT_EMPTY_BOARD);
+//        verify(putPerformer).perform(OPPONENT_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER);
+//        assertEquals(PLAYER_EMPTY_BOARD, gameState.getCurrentBoard2());
+//        verify(boardPrinter).printBoard(PLAYER_EMPTY_BOARD);
+//
+//    }
+//
+//
+//
+//    @Test
 //    public void testProcessShouldNotUpdateGameStateWhenPutPerformingFails() throws PutException {
 //        // given
 //        doThrow(PutException.class).when(putPerformer).perform(PLAYER_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER);
+//        doThrow(PutException.class).when(putPerformer).perform(OPPONENT_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER);
 //
 //        // when
 //        underTest.process(PUT_COMMAND);
@@ -83,6 +106,8 @@ public class PutCommandTest {
 //        // then
 //        verify(putPerformer).perform(PLAYER_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER);
 //        assertEquals(PLAYER_BOARD, gameState.getCurrentBoard());
+//        verify(putPerformer).perform(OPPONENT_BOARD, ROW_INDEX, COLUMN_INDEX, CHARACTER);
+//        assertEquals(OPPONENT_BOARD, gameState.getCurrentBoard1());
 //        verifyNoInteractions(boardPrinter);
 //        verify(printWrapper).printLine(PUT_ERROR_MESSAGE);
 //    }

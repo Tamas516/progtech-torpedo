@@ -39,23 +39,24 @@ public class PlayerBoard {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PlayerBoard that = (PlayerBoard) o;
-        return numberOfRows == that.numberOfRows && numberOfColumns == that.numberOfColumns && Arrays.equals(board, that.board);
+        PlayerBoard playerBoard1 = (PlayerBoard) o;
+        return numberOfRows == playerBoard1.numberOfRows && numberOfColumns == playerBoard1.numberOfColumns &&
+                Arrays.deepEquals(board, playerBoard1.board);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(numberOfRows, numberOfColumns);
-        result = 31 * result + Arrays.hashCode(board);
+        result = 31 * result + Arrays.deepHashCode(board);
         return result;
     }
 
     @Override
     public String toString() {
-        return "PlayerBoard{" +
+        return "Board{" +
                 "numberOfRows=" + numberOfRows +
                 ", numberOfColumns=" + numberOfColumns +
-                ", board=" + Arrays.toString(board) +
+                ", board=" + Arrays.deepToString(board) +
                 '}';
     }
 
